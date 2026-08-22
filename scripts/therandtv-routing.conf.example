@@ -1,0 +1,22 @@
+# TherandTV Routing example configuration
+# Copy this file to /storage/.config/therandtv-routing.conf and edit it for your network.
+# Never publish a copy containing private infrastructure details or credentials.
+# The IP addresses below are reserved documentation ranges and are not usable defaults.
+
+# Normal Internet route used for BE/split mode.
+NORMAL_IF="wlan0"
+NORMAL_GW="192.0.2.1"
+
+# French WireGuard interface managed by ConnMan.
+WG_FR_IF="wg0"
+WG_CONNMAN_SERVICE="vpn_example"
+
+# Public WireGuard server endpoint (TEST-NET-3).
+WG_ENDPOINT_IP="203.0.113.10"
+
+# Peer reachable inside the French tunnel (TEST-NET-2 placeholder).
+WG_FR_PEER="198.51.100.1"
+
+# Optional independent private VPS tunnel. Leave empty when unused.
+WG_VPS_IF="wg-vps"
+WG_VPS_HOST=""

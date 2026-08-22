@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="service.therandtv.routing"
+       name="TherandTV Routing"
+       version="0.2.5"
+       provider-name="Therand90">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+
+  <extension point="xbmc.service" library="service.py" start="startup"/>
+
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Routing and live-source failover service for TherandTV</summary>
+    <summary lang="fr_FR">Service de routage et de failover pour TherandTV</summary>
+    <description lang="en_GB">Applies the route required by each source, validates Kodi startup and automatically tries the next live source when startup fails.</description>
+    <description lang="fr_FR">Applique le routage requis par chaque source, valide le démarrage dans Kodi et essaie automatiquement la source suivante en cas d'échec.</description>
+    <platform>linux</platform>
+    <license>MIT</license>
+    <source>https://github.com/Therand90/service.therandtv.routing</source>
+  </extension>
+</addon>

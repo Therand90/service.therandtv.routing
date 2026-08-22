@@ -1,0 +1,59 @@
+name: Repository policy checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    name: Repository policy checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Validate public-release files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LICENSE
+          test -f README.md
+          test -f README.fr.md
+          test -f SECURITY.md
+          test -f SECURITY.fr.md
+          test -f scripts/therandtv-routing.conf.example
+          grep --quiet '\[Français\]' README.md
+          grep --quiet '\[English\]' README.fr.md
+          grep --quiet 'THERANDTV_ROUTING_CONFIG' scripts/wg-fr-full-routing.sh
+          grep --quiet 'THERANDTV_ROUTING_CONFIG' scripts/wg-split-routing.sh
+
+      - name: Reject floating GitHub Actions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          sha = re.compile(r'^[0-9a-f]{40}$')
+          failures = []
+          for workflow in Path('.github/workflows').glob('*.y*ml'):
+              for number, line in enumerate(workflow.read_text(encoding='utf-8').splitlines(), 1):
+                  stripped = line.strip()
+                  if not stripped.startswith('uses:'):
+                      continue
+                  target = stripped.split('uses:', 1)[1].strip().split()[0]
+                  if target.startswith('./'):
+                      continue
+                  if '@' not in target or not sha.fullmatch(target.rsplit('@', 1)[1]):
+                      failures.append(f'{workflow}:{number}: {target}')
+          if failures:
+              raise SystemExit('GitHub Actions must use full commit SHAs:\n' + '\n'.join(failures))
+          PY
