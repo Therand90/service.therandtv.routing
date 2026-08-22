@@ -2,6 +2,9 @@
 
 # TherandTV Routing
 
+[![Tests](https://github.com/Therand90/service.therandtv.routing/actions/workflows/tests.yml/badge.svg)](https://github.com/Therand90/service.therandtv.routing/actions/workflows/tests.yml)
+[![Contrôles de politique du dépôt](https://github.com/Therand90/service.therandtv.routing/actions/workflows/repository-policy.yml/badge.svg)](https://github.com/Therand90/service.therandtv.routing/actions/workflows/repository-policy.yml)
+
 Service Kodi compagnon de [`plugin.video.therandtv`](https://github.com/Therand90/plugin.video.therandtv). Il applique le routage requis par la lecture, supervise le démarrage des chaînes live et passe à la source suivante lorsqu’un démarrage échoue.
 
 > [!IMPORTANT]
