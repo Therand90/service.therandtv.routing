@@ -88,7 +88,7 @@ Les familles sont actuellement ordonnées ainsi :
 2. le proxy VAVOO local sur le port loopback `8899` ;
 3. les autres cibles HTTP(S) ou plugins Kodi.
 
-La source sélectionnée reçoit un délai de démarrage adapté à sa famille. En cas d’échec, le service demande le candidat suivant. Une source logique VAVOO n’est pas placée en cooldown pendant cinq minutes simplement parce que son proxy local poursuit encore sa propre récupération au moment où le timeout externe expire.
+La source sélectionnée reçoit un délai de démarrage adapté à sa famille. Le proxy logique VAVOO dispose de **50 secondes** afin que ses propres sondes qualité, tests média et basculements internes aient le temps d’aboutir avant que le routeur externe ne passe à la source suivante. Les sources génériques restent à 12 secondes et Catch-up TV & More à 25 secondes. Une source logique VAVOO n’est pas placée en cooldown pendant cinq minutes simplement parce que son proxy local poursuit encore sa propre récupération au moment où ce timeout externe expire.
 
 ## Coexistence avec `service.therand.autotrailer`
 
