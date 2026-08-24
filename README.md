@@ -88,7 +88,7 @@ Current source families are ordered as:
 2. the local VAVOO proxy on loopback port `8899`;
 3. other HTTP(S) or Kodi plugin targets.
 
-The selected source receives a startup grace period appropriate to its family. On startup failure the service requests the next candidate. A logical VAVOO source is not put on a five-minute cooldown merely because its local proxy is still performing internal recovery when the outer timeout expires.
+The selected source receives a startup grace period appropriate to its family. The logical VAVOO proxy receives **50 seconds** so its own quality probes, media checks and internal variant failover can complete before the outer routing service moves to the next source. Generic sources remain at 12 seconds and Catch-up TV & More at 25 seconds. A logical VAVOO source is not put on a five-minute cooldown merely because its local proxy is still performing internal recovery when that outer timeout expires.
 
 ## Coexistence with `service.therand.autotrailer`
 
