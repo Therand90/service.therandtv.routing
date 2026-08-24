@@ -61,7 +61,7 @@ class FailoverTests(unittest.TestCase):
         self.assertEqual(25, startup_timeout_seconds({"family": "catchup"}))
 
     def test_vavoo_gets_proxy_recovery_grace(self):
-        self.assertEqual(35, startup_timeout_seconds({"family": "vavoo"}))
+        self.assertEqual(50, startup_timeout_seconds({"family": "vavoo"}))
 
     def test_other_keeps_fast_startup_timeout(self):
         self.assertEqual(12, startup_timeout_seconds({"family": "other"}))
